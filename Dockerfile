@@ -11,7 +11,7 @@ ADD	vendor/polyverse/basehook.so /tmp/basehook.so
 ADD	vendor/polyverse/fullhook.so /tmp/fullhook.so
 ADD gdb.sh /tmp/gdb.sh
 ADD unfreeze.sh /tmp/unfreeze.sh
-ADD unfreeze.sh /tmp/unfreeze.sh
+ADD test_glibc.sh /tmp/test_glibc.sh
 
 ENV PV_TWIDDLER_INITIAL_DELAY=1000
 ENV PV_TWIDDLER_LOOP_INTERVAL=500
