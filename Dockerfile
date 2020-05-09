@@ -1,4 +1,5 @@
-FROM	polyverse/node-echo-server:854f6f20a5ba4f025ffe125da139d5bd024e7d39
+# FROM	polyverse/node-echo-server:854f6f20a5ba4f025ffe125da139d5bd024e7d39
+FROM	polyverse/docker-rr:latest
 
 # Packages needed by our interventions (Moved up so docker will have the layer cached during development)
 RUN     DEBIAN_FRONTEND=noninteractive bash -c "(apt-get -qq update && apt-get -yqq install libunwind-dev libsystemd-dev gdb binutils less vim curl)"
