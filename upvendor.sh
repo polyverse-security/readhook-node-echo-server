@@ -42,7 +42,7 @@ function polyverse() {
 	else
 		wget -nv https://github.com/polyverse/readhook/releases/download/${POLYVERSE_READHOOK_VER}/basehook.so
 		wget -nv https://github.com/polyverse/readhook/releases/download/${POLYVERSE_READHOOK_VER}/fullhook.so
-		cp -p /Users/mariusz/Downloads/LinuxExes/scrambled/basehook.so .
+		# cp -p /Users/mariusz/Downloads/LinuxExes/scrambled/basehook.so .
 	fi
 }
 
