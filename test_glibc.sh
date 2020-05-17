@@ -16,7 +16,7 @@ mknod /tmp/pv_shuffler_wait_pipe p || true
 
 # /usr/local/bin/rr env PV_SHUFFLER_PIPE_WAIT=1 PV_SHUFFLER_DISABLE_FREEZE_THREADS=1 LD_PRELOAD=/opt/pv/twiddler/libpe_binary_scrambler_hook.so /usr/bin/nodejs /src/echo-server.js
 
-export LD_DEBUG=bindings
+export LD_DEBUG=files
 export PV_SHUFFLER_PIPE_WAIT=1
 export PV_SHUFFLER_DISABLE_FREEZE_THREADS=1
 # LD_PRELOAD=/opt/pv/twiddler/libpe_binary_scrambler_hook.so
@@ -27,6 +27,15 @@ export PV_SHUFFLER_DISABLE_FREEZE_THREADS=1
 #    -ex 'set env PV_SHUFFLER_PIPE_WAIT=1' -ex 'set env PV_SHUFFLER_DISABLE_FREEZE_THREADS 1' \
 #     -ex 'set env LD_PRELOAD /opt/pv/twiddler/libpe_binary_scrambler_hook.so' -ex 'set args /usr/bin/nodejs  /src/echo-server.js' /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 
 
-env LD_LIBRARY_PATH=/mnt/glibc/scrambled LD_PRELOAD=/opt/pv/twiddler/libpe_binary_scrambler_hook.so /usr/bin/nodejs /src/echo-server.js
+# env LD_LIBRARY_PATH=/mnt/glibc/scrambled LD_PRELOAD=/opt/pv/twiddler/libpe_binary_scrambler_hook.so /usr/bin/nodejs /src/echo-server.js
 
-# /usr/local/bin/rr /usr/bin/nodejs /src/echo-server.js
+# Prepare settings for rr replay
+cat > ~/.gdbinit << HERE
+set verbose on
+set debug-file-directory /usr/lib/debug
+HERE
+
+# add-symbol-file /opt/pv/twiddler/libpe_binary_scrambler_hook.so -o 0x7fe399e8f000
+
+export LLP=/mnt/glibc/scrambled
+/usr/local/bin/rr env LD_LIBRARY_PATH=$LLP LD_PRELOAD=/opt/pv/twiddler/libpe_binary_scrambler_hook.so /usr/bin/nodejs /src/echo-server.js
