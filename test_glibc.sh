@@ -33,7 +33,15 @@ export PV_SHUFFLER_DISABLE_FREEZE_THREADS=1
 cat > ~/.gdbinit << HERE
 set verbose on
 set debug-file-directory /usr/lib/debug
+set substitute-path /build/glibc-LK5gWL /home/root/src
+define hook-stop
+disas \$rip-0x20,+0x40
+x/16xg \$rsp
+bt
+end
 HERE
+# The line below seems not so useful
+# set directories /home/root/src/glibc-2.23/stdio-common
 
 # add-symbol-file /opt/pv/twiddler/libpe_binary_scrambler_hook.so -o 0x7fe399e8f000
 
