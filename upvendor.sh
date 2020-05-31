@@ -37,8 +37,10 @@ function upvendor() {
 
 function polyverse() {
 	if [[ -n "$PV_UPVENDOR_LOCAL" ]]; then # (Convenience for development)
-		cp -v ../../../readhook/dll/basehook.so .
-		cp -v ../../../readhook/dll/fullhook.so .
+		echo "PV_UPVENDOR_LOCAL PWD: $PWD"
+		ls -al ../../../..
+		cp -v ../../../../polyverse/readhook/dll/basehook.so .
+		cp -v ../../../../polyverse/readhook/dll/fullhook.so .
 	else
 		wget -nv https://github.com/polyverse/readhook/releases/download/${POLYVERSE_READHOOK_VER}/basehook.so
 		wget -nv https://github.com/polyverse/readhook/releases/download/${POLYVERSE_READHOOK_VER}/fullhook.so

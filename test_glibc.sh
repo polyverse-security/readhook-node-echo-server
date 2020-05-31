@@ -39,11 +39,21 @@ disas \$rip-0x20,+0x40
 x/16xg \$rsp
 bt
 end
+define sym_libc
+set \$nadr = \$arg0+0x1000
+add-symbol-file /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.23.so -o \$nadr
+end
+define sym_twiddler
+set \$nadr = \$arg0
+add-symbol-file /opt/pv/twiddler/libpe_binary_scrambler_hook.so -o \$nadr
+end
 HERE
 # The line below seems not so useful
 # set directories /home/root/src/glibc-2.23/stdio-common
 
 # add-symbol-file /opt/pv/twiddler/libpe_binary_scrambler_hook.so -o 0x7fe399e8f000
 
-export LLP=/mnt/glibc/scrambled
-/usr/local/bin/rr env LD_LIBRARY_PATH=$LLP LD_PRELOAD=/opt/pv/twiddler/libpe_binary_scrambler_hook.so /usr/bin/nodejs /src/echo-server.js
+ln -s /mnt/glibc/scrambled/libc-2.23.so  /mnt/glibc/scrambled/libc.so.6 || true
+
+# export LLP=/mnt/glibc/scrambled
+/usr/local/bin/rr env LD_LIBRARY_PATH=$LLP LD_PRELOAD=/opt/pv/twiddler/libpe_binary_scrambler_hook.so:/tmp/basehook.so /usr/bin/nodejs /src/echo-server.js

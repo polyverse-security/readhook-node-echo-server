@@ -10,6 +10,7 @@ pushd ../../polyverse-security/pe-binary-scrambler-hook
 export POLYVERSE_SECURITY_TWIDDLER_SHA=$(git rev-parse --verify HEAD)
 popd
 
+export PV_UPVENDOR_LOCAL=1 
 ./upvendor.sh
 [ $? -ne 0 ] && return 1
 ./build.sh
