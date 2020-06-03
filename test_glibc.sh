@@ -32,8 +32,10 @@ export PV_SHUFFLER_DISABLE_FREEZE_THREADS=1
 # Prepare settings for rr replay
 cat > ~/.gdbinit << HERE
 set verbose on
+set pagination off
 set debug-file-directory /usr/lib/debug
 set substitute-path /build/glibc-LK5gWL /home/root/src
+set directories /home/root/src/readhook
 define hook-stop
 disas \$rip-0x20,+0x40
 x/16xg \$rsp
@@ -46,6 +48,7 @@ end
 define sym_twiddler
 set \$nadr = \$arg0
 add-symbol-file /opt/pv/twiddler/libpe_binary_scrambler_hook.so -o \$nadr
+source gdb_extensions.py
 end
 HERE
 # The line below seems not so useful

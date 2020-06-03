@@ -10,6 +10,7 @@ docker run --privileged --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -
      -v $HOOK_PATH:/mnt/cross -v $GLIBC_PATH:/mnt/glibc \
      --mount "source=src-glibc-2.23,target=/home/root/src/glibc-2.23" \
      --mount "source=build-glibc-2.23,target=/home/root/build/glibc-2.23" \
+     --mount "type=bind,source=/home/mariusz/go/src/github.com/polyverse/readhook,target=/home/root/src/readhook" \
      --entrypoint=/bin/bash \
      polyverse/readhook-node-echo-server
 

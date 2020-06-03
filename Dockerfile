@@ -14,6 +14,7 @@ ADD	vendor/polyverse/fullhook.so /tmp/fullhook.so
 ADD gdb.sh /tmp/gdb.sh
 ADD unfreeze.sh /tmp/unfreeze.sh
 ADD test_glibc.sh /tmp/test_glibc.sh
+ADD gdb_extensions.py /src/gdb_extensions.py
 
 ENV PV_TWIDDLER_INITIAL_DELAY=1000
 ENV PV_TWIDDLER_LOOP_INTERVAL=500
