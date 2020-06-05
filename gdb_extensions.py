@@ -23,19 +23,21 @@ class ReloadSymbols(gdb.Command):
         mmap = {}
         for r in regions:
             cols = r.split()
-            print('cols:', cols, 'len:', len(cols))
+            # print('cols:', cols, 'len:', len(cols))
             if len(cols) > 4:
                 if (not cols[4] in mmap and 
                         not "Start" in cols[0] and not "[" in cols[4] and 
                         not "/dev/zero" in cols[4] and 
                         os.path.exists(cols[4]) ):
-                    print('region:', cols[0], cols[2], cols[4])
+                    # print('region:', cols[0], cols[2], cols[4])
                     mmap[cols[4]] = cols[0]
                 else:
-                    print(cols[0], cols[4], "Already in map")
+                    # print(cols[0], cols[4], "Already in map")
+                    pass
             else:
                 if len(cols) > 0:
-                    print(cols[0], "Too short") 
+                    # print(cols[0], "Too short") 
+                    pass
         for region in mmap:
             cmd = 'add-symbol-file ' + region + ' -o ' + mmap[region]
             gdb.execute('print "'+ cmd + '"')
