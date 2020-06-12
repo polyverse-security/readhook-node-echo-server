@@ -35,7 +35,7 @@ set verbose on
 set pagination off
 set debug-file-directory /usr/lib/debug
 set substitute-path /build/glibc-LK5gWL /home/root/src
-set directories /home/root/src/readhook
+set directories /home/root/src/readhook:/home/root/src/pe-binary-scrambler-hook/
 define hook-stop
 disas \$rip-0x20,+0x40
 x/16xg \$rsp
