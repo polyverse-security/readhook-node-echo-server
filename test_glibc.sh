@@ -59,4 +59,9 @@ HERE
 ln -s /mnt/glibc/scrambled/libc-2.23.so  /mnt/glibc/scrambled/libc.so.6 || true
 
 # export LLP=/mnt/glibc/scrambled
-/usr/local/bin/rr env LD_LIBRARY_PATH=$LLP LD_PRELOAD=/opt/pv/twiddler/libpe_binary_scrambler_hook.so:/tmp/basehook.so /usr/bin/nodejs /src/echo-server.js
+export LLP=/tmp
+/usr/local/bin/rr env LD_LIBRARY_PATH=$LLP LD_PRELOAD=/opt/pv/twiddler/libpe_binary_scrambler_hook.so:/tmp/fullhook.so /usr/bin/nodejs /src/echo-server.js
+
+# gdb -ex 'set env PV_SHUFFLER_PIPE_WAIT=1' -ex 'set env PV_SHUFFLER_DISABLE_FREEZE_THREADS 1' \
+#      -ex 'set env LD_PRELOAD /opt/pv/twiddler/libpe_binary_scrambler_hook.so:/tmp/basehook.so' -ex 'set args /src/echo-server.js' /usr/bin/nodejs
+
